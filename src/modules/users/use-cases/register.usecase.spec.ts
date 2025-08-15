@@ -14,7 +14,6 @@ describe('Register user use case', () => {
 
   it('should register a new user successfully', async () => {
     const userData = {
-      id: 'user-id',
       name: 'John Doe',
       email: 'john.doe@example.com',
       password: 'securepassword',
