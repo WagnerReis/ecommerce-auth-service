@@ -15,4 +15,19 @@ export class InMemoryUserRepository implements UserRepositoryInterface {
       resolve(user || null);
     });
   }
+
+  async save(user: User): Promise<User> {
+    const index = this.users.findIndex((u) => u.id === user.id);
+    if (index !== -1) {
+      this.users[index] = user;
+    }
+    return new Promise((resolve) => resolve(user));
+  }
+
+  async findById(id: string): Promise<User | null> {
+    return new Promise((resolve) => {
+      const user = this.users.find((user) => user.id === id);
+      resolve(user || null);
+    });
+  }
 }

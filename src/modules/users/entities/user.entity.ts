@@ -51,7 +51,7 @@ export class User {
     comment: 'Token de refresh para autenticação',
   })
   @Exclude({ toPlainOnly: true })
-  refreshToken?: string;
+  refreshToken: string;
 
   @CreateDateColumn({
     comment: 'Data de criação do registro',
