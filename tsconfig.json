@@ -28,15 +28,21 @@
       "@/*": [
         "./src/*"
       ],
+      "@app/cookie": [
+        "libs/cookie/src"
+      ],
+      "@app/cookie/*": [
+        "libs/cookie/src/*"
+      ],
+      "@app/cryptography": [
+        "libs/cryptography/src"
+      ],
       "@app/env": [
         "libs/env/src"
       ],
       "@app/env/*": [
         "libs/env/src/*"
-      ],
-      "@app/cryptography": [
-        "libs/cryptography/src"
-      ],
+      ]
     }
   }
 }

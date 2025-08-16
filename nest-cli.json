@@ -7,6 +7,15 @@
     "webpack": true
   },
   "projects": {
+    "cookie": {
+      "type": "library",
+      "root": "libs/cookie",
+      "entryFile": "index",
+      "sourceRoot": "libs/cookie/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/cookie/tsconfig.lib.json"
+      }
+    },
     "env": {
       "type": "library",
       "root": "libs/env",
