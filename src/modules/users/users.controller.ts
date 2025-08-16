@@ -1,4 +1,5 @@
 import { Body, Controller, HttpException, Post } from '@nestjs/common';
+import { Public } from '../auth/decorators/public.decorator';
 import { CreateUserDTO } from './dtos/create-user.dto';
 import { RegisterUserUseCase } from './use-cases/register.usecase';
 
@@ -6,6 +7,7 @@ import { RegisterUserUseCase } from './use-cases/register.usecase';
 export class UsersController {
   constructor(private readonly registerUserUseCase: RegisterUserUseCase) {}
 
+  @Public()
   @Post()
   async register(@Body() userData: CreateUserDTO) {
     try {
