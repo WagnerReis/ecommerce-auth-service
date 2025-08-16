@@ -22,4 +22,16 @@ export class UserRepository implements UserRepositoryInterface {
 
     return user;
   }
+
+  async save(user: User): Promise<User> {
+    return await this.ormRepo.save(user);
+  }
+
+  async findById(id: string): Promise<User | null> {
+    const user = await this.ormRepo.findOne({
+      where: { id },
+    });
+
+    return user;
+  }
 }
