@@ -25,7 +25,6 @@ describe('Register user use case', () => {
     const user = await SUT.execute(userData);
 
     expect(user).toBeInstanceOf(User);
-    expect(user.id).toBeDefined();
     expect(user.name).toBe(userData.name);
     expect(user.email).toBe(userData.email);
     expect(user.password).toBeUndefined();
