@@ -1,3 +1,4 @@
+import { CryptographyModule } from '@app/cryptography';
 import { envSchema } from '@app/env/env';
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
@@ -12,6 +13,7 @@ import { UsersModule } from './modules/users/users.module';
     }),
     UsersModule,
     DatabaseModule,
+    CryptographyModule,
   ],
 })
 export class AppModule {}

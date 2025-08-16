@@ -1,15 +1,18 @@
+import { FakeHasher } from 'test/cryptography/fake-hasher';
 import { InMemoryUserRepository } from 'test/repositories/in-memory-user-repository';
 import { CreateUserDTO } from '../dtos/create-user.dto';
 import { User } from '../entities/user.entity';
 import { RegisterUserUseCase } from './register.usecase';
 
 let inMemoryUserRepository: InMemoryUserRepository;
+let hashGenerator: FakeHasher;
 let SUT: RegisterUserUseCase;
 
 describe('Register user use case', () => {
   beforeEach(() => {
     inMemoryUserRepository = new InMemoryUserRepository();
-    SUT = new RegisterUserUseCase(inMemoryUserRepository);
+    hashGenerator = new FakeHasher();
+    SUT = new RegisterUserUseCase(inMemoryUserRepository, hashGenerator);
   });
 
   it('should register a new user successfully', async () => {

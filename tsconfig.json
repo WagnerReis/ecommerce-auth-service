@@ -25,12 +25,18 @@
       "vitest/globals"
     ],
     "paths": {
+      "@/*": [
+        "./src/*"
+      ],
       "@app/env": [
         "libs/env/src"
       ],
       "@app/env/*": [
         "libs/env/src/*"
-      ]
+      ],
+      "@app/cryptography": [
+        "libs/cryptography/src"
+      ],
     }
   }
 }

@@ -1,3 +1,4 @@
+import { CryptographyModule } from '@app/cryptography';
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './entities/user.entity';
@@ -7,7 +8,7 @@ import { RegisterUserUseCase } from './use-cases/register.usecase';
 import { UsersController } from './users.controller';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([User])],
+  imports: [TypeOrmModule.forFeature([User]), CryptographyModule],
   controllers: [UsersController],
   providers: [
     {
