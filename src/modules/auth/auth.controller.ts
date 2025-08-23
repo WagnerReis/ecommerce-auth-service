@@ -95,8 +95,11 @@ export class AuthController {
     }
 
     const { accessToken, refreshToken: newRefreshToken } = result.value;
-
     this.cookieManager.setAuthCookies(res, accessToken, newRefreshToken);
+    return res.json({
+      success: true,
+      message: 'token refreshed',
+    });
   }
 
   @HttpCode(HttpStatus.OK)
@@ -137,7 +140,6 @@ export class AuthController {
 
   @Get('me')
   getProfile(@CurrentUser() user: { sub: string }) {
-    console.log('aqui');
     if (!user) {
       throw new UnauthorizedException('User not authenticated');
     }
