@@ -5,6 +5,7 @@ import { AppI18nModule } from 'i18n/i18n.module';
 import { User } from './entities/user.entity';
 import { UserRepository } from './repositories/typeorm/user-repository';
 import { UserRepositoryInterface } from './repositories/user-repository.interface';
+import { GetUserUseCase } from './use-cases/get-user.usecase';
 import { RegisterUserUseCase } from './use-cases/register.usecase';
 import { UsersController } from './users.controller';
 
@@ -21,6 +22,7 @@ import { UsersController } from './users.controller';
       useClass: UserRepository,
     },
     RegisterUserUseCase,
+    GetUserUseCase,
   ],
 })
 export class UsersModule {}

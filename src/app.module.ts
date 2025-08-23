@@ -1,5 +1,6 @@
 import { CryptographyModule } from '@app/cryptography';
 import { envSchema } from '@app/env/env';
+import { CacheModule } from '@nestjs/cache-manager';
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { APP_GUARD } from '@nestjs/core';
@@ -20,6 +21,11 @@ import { UsersModule } from './modules/users/users.module';
     CryptographyModule,
     AuthModule,
     AppI18nModule,
+    CacheModule.register({
+      isGlobal: true,
+      ttl: 60, // segundos
+      max: 100, // número máximo de itens
+    }),
   ],
   providers: [
     {
