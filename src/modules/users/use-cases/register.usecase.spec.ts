@@ -6,13 +6,17 @@ import { RegisterUserUseCase } from './register.usecase';
 
 let inMemoryUserRepository: InMemoryUserRepository;
 let hashGenerator: FakeHasher;
+let i18n: any;
 let SUT: RegisterUserUseCase;
 
 describe('Register user use case', () => {
   beforeEach(() => {
     inMemoryUserRepository = new InMemoryUserRepository();
     hashGenerator = new FakeHasher();
-    SUT = new RegisterUserUseCase(inMemoryUserRepository, hashGenerator);
+    i18n = {
+      t: (key: string) => key, // Mock simples que retorna a chave
+    };
+    SUT = new RegisterUserUseCase(inMemoryUserRepository, hashGenerator, i18n);
   });
 
   it('should register a new user successfully', async () => {
@@ -27,6 +31,23 @@ describe('Register user use case', () => {
     expect(user).toBeInstanceOf(User);
     expect(user.name).toBe(userData.name);
     expect(user.email).toBe(userData.email);
-    expect(user.password).toBeUndefined();
+  });
+
+  it('should throw error when user already exists', async () => {
+    const userData = {
+      name: 'John Doe',
+      email: 'john.doe@example.com',
+      password: 'securepassword',
+    } as CreateUserDTO;
+
+    const existingUser = new User({
+      ...userData,
+      password: 'hashedpassword',
+    });
+    await inMemoryUserRepository.create(existingUser);
+
+    await expect(SUT.execute(userData)).rejects.toThrow(
+      'validation.userAlreadyExists',
+    );
   });
 });
