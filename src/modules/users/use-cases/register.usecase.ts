@@ -34,7 +34,6 @@ export class RegisterUserUseCase {
 
       const createdUser = await this.userRepository.create(user);
       this.logger.debug(`User created successfully: ${createdUser.email}`);
-      Reflect.deleteProperty(createdUser, 'password');
       return createdUser;
     } catch (error) {
       this.logger.error(error.message, error.stack);
