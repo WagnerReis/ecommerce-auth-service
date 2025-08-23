@@ -16,6 +16,7 @@ import {
 } from '@nestjs/common';
 import { IsEmail, IsString, MinLength } from 'class-validator';
 import express from 'express';
+import { I18nService } from 'nestjs-i18n';
 import { CurrentUser } from './decorators/current-user.decorator';
 import { Public } from './decorators/public.decorator';
 import { CreateRefreshTokenUseCase } from './usecases/create-refresh-token.usecase';
@@ -39,6 +40,7 @@ export class AuthController {
     private readonly cookieManager: CookieManagerInterface,
     private readonly refreshTokenUseCase: CreateRefreshTokenUseCase,
     private readonly removeRefreshTokenUseCase: RemoveRefreshTokenUseCase,
+    private readonly i18n: I18nService,
   ) {}
 
   private readonly logger: Logger = new Logger(AuthController.name);
@@ -98,7 +100,7 @@ export class AuthController {
     this.cookieManager.setAuthCookies(res, accessToken, newRefreshToken);
     return res.json({
       success: true,
-      message: 'token refreshed',
+      message: this.i18n.t('auth.token_refreshed'),
     });
   }
 
@@ -130,7 +132,7 @@ export class AuthController {
 
       return res.json({
         success: true,
-        message: 'Successfully logged out',
+        message: this.i18n.t('auth.successfully_logged_out'),
       });
     } catch (error) {
       this.logger.error(`Logout error for user ${userId}: ${error.message}`);
