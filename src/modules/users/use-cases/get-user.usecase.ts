@@ -7,7 +7,7 @@ import { UserRepositoryInterface } from '../repositories/user-repository.interfa
 import { NotFoundError } from './errors/not-found.error';
 
 type GetUserResponse = Either<
-  NotFoundError | null,
+  NotFoundError,
   {
     user: User;
   }

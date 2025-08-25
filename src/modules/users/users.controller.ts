@@ -1,9 +1,9 @@
 import {
-  BadRequestException,
   Body,
   Controller,
   Get,
   HttpException,
+  InternalServerErrorException,
   NotFoundException,
   Post,
 } from '@nestjs/common';
@@ -44,7 +44,7 @@ export class UsersController {
         if (error instanceof NotFoundError) {
           throw new NotFoundException(error.message);
         } else {
-          throw new BadRequestException(error);
+          throw new InternalServerErrorException(error);
         }
       }
 
