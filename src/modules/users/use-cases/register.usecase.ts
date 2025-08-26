@@ -1,5 +1,6 @@
 import { HashGenerator } from '@/core/cryptography/hash-generator';
 import { Injectable, Logger } from '@nestjs/common';
+import { I18nService } from 'nestjs-i18n';
 import { CreateUserDTO } from '../dtos/create-user.dto';
 import { User } from '../entities/user.entity';
 import { UserRepositoryInterface } from '../repositories/user-repository.interface';
@@ -11,6 +12,7 @@ export class RegisterUserUseCase {
   constructor(
     private readonly userRepository: UserRepositoryInterface,
     private readonly hashGenerator: HashGenerator,
+    private readonly i18n: I18nService,
   ) {}
 
   async execute(data: CreateUserDTO): Promise<User> {
@@ -20,7 +22,7 @@ export class RegisterUserUseCase {
       );
 
       if (userAlreadyExists) {
-        throw new Error('User already exists');
+        throw new Error(this.i18n.t('validation.userAlreadyExists'));
       }
 
       const hashedPassword = await this.hashGenerator.hash(data.password);
@@ -32,7 +34,6 @@ export class RegisterUserUseCase {
 
       const createdUser = await this.userRepository.create(user);
       this.logger.debug(`User created successfully: ${createdUser.email}`);
-      Reflect.deleteProperty(createdUser, 'password');
       return createdUser;
     } catch (error) {
       this.logger.error(error.message, error.stack);

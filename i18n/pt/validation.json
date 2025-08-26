@@ -1,0 +1,5 @@
+{
+  "isNotEmpty": "O campo $property não pode estar vazio.",
+  "isEmail": "O campo email precisa ser um email válido.",
+  "userAlreadyExists": "Usuário já existe."
+}
