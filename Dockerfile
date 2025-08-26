@@ -24,6 +24,7 @@ COPY --from=builder /usr/src/app/node_modules ./node_modules
 COPY --from=builder /usr/src/app/dist ./dist
 COPY --from=builder /usr/src/app/migrations ./migrations
 COPY --from=builder /usr/src/app/typeOrm.config.ts ./typeOrm.config.ts
+COPY --from=builder /usr/src/app/i18n ./i18n  
 
 EXPOSE 3000
 

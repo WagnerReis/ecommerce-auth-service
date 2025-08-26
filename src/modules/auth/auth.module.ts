@@ -4,6 +4,7 @@ import { EnvModule, EnvService } from '@app/env';
 import { Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { AppI18nModule } from 'i18n/i18n.module';
 import { User } from '../users/entities/user.entity';
 import { UserRepository } from '../users/repositories/typeorm/user-repository';
 import { UserRepositoryInterface } from '../users/repositories/user-repository.interface';
@@ -28,6 +29,7 @@ import { SignInUseCase } from './usecases/sing-in.usecase';
         secret: envService.get('JWT_SECRET'),
       }),
     }),
+    AppI18nModule,
   ],
   controllers: [AuthController],
   providers: [
